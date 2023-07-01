@@ -4,29 +4,30 @@ on:
   push:
     branches:
       - main
-    
+
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: containerapps-album-backend # ${{ github.repository }}
 
 jobs:
-  dockerloginbuildpush:
+  build-and-push:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
 
     steps:
-    - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Log in to the GitHub Container registry
-      uses: docker/login-action@v1
-      with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Log in to the GitHub Container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Build and push Docker image
-      run: |
-        docker build -t ghcr.io/${{ github.actor }}/containerapps-album-backend .
-        docker push ghcr.io/${{ github.actor }}/containerapps-album-backend:latest
+      - name: Build and push Docker image
+        run: |
+          docker build -t ghcr.io/${{ github.actor }}/${{ env.IMAGE_NAME }} .
+          docker push ghcr.io/${{ github.actor }}/${{ env.IMAGE_NAME }}:latest
