@@ -9,6 +9,7 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: houssemdellai/containerapps-album-backend # ${{ github.repository }}
   GITHUB_USERNAME: houssemdellai
+  DOCKER_TOKEN: ${{ secrets.MY_DOCKER_TOKEN }}
 
 jobs:
   build-and-push:
@@ -26,7 +27,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ env.GITHUB_USERNAME }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.DOCKER_TOKEN }}
           
       - name: Extract metadata (tags, labels) for Docker
         id: meta
