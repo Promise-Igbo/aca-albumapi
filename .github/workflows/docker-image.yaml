@@ -7,8 +7,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: containerapps-album-backend # ${{ github.repository }}
-  GITHUB_USERNAME: promiseigbo
+  IMAGE_NAME: houssemdellai/containerapps-album-backend # ${{ github.repository }}
+  GITHUB_USERNAME: houssemdellai
 
 jobs:
   build-and-push:
