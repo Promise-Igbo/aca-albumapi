@@ -11,8 +11,8 @@ env:
   IMAGE_NAME: promise/containerapps-album-backend # ${{ github.repository }}
 
 jobs:
-
-  build-and-push-image:
+  dockerloginbuildpush:
+  #build-and-push-image:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -23,10 +23,10 @@ jobs:
     #- name: Build the Docker image
     #  run: docker build ./src/ --file ./src/Dockerfile --tag album-api:$(date +%s)
       
-    - name: Log in to the Container registry
-      uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+    - name: Log in to the GitHub Container registry
+      uses: docker/login-action@v1
       with:
-        registry: ${{ env.REGISTRY }}
+        registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
         
